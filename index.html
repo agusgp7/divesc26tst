@@ -23,6 +23,7 @@
       <button class="nav" data-section="planilla">📋 Planilla</button>
       <button class="nav" data-section="estadisticas">📊 Estadísticas</button>
       <button class="nav" data-section="datos">💾 Importar / Exportar</button>
+      <button class="nav" data-section="calendario">📅 Calendario</button>
     </aside>
 
     <main class="main">
@@ -115,6 +116,21 @@
           <textarea id="jsonPreview" readonly placeholder="Acá aparecerá el JSON exportado..."></textarea>
         </div>
       </section>
+    
+      <section id="calendario" class="section">
+        <div class="empty-card">
+          <h2>Calendario de Charlas</h2>
+
+          <div class="calendar-nav">
+            <button onclick="cambiarMes(-1)">◀</button>
+            <h3 id="calendarTitulo"></h3>
+            <button onclick="cambiarMes(1)">▶</button>
+          </div>
+
+          <div id="calendar"></div>
+        </div>
+      </section>
+
     </main>
   </div>
 
