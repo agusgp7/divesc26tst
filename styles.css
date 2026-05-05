@@ -442,3 +442,51 @@ label {
     margin-left: 0;
   }
 }
+
+
+.calendar-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 15px;
+}
+
+.calendar-nav button {
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 0;
+  cursor: pointer;
+}
+
+#calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+
+.day {
+  background: white;
+  min-height: 90px;
+  border-radius: 10px;
+  padding: 6px;
+  box-shadow: 0 1px 6px #0001;
+  font-size: 12px;
+}
+
+.day-number {
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.event {
+  border-radius: 6px;
+  padding: 3px;
+  margin-top: 3px;
+  color: white;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.event.amarillo { background: #eab308; }
+.event.verde { background: #22c55e; }
