@@ -1152,3 +1152,72 @@ function actualizarTodo() {
 
 cargarDatosDemo();
 actualizarTodo();
+
+
+let fechaActual = new Date();
+
+function renderCalendario() {
+  const calendar = document.getElementById("calendar");
+  const titulo = document.getElementById("calendarTitulo");
+
+  if (!calendar) return;
+
+  const year = fechaActual.getFullYear();
+  const month = fechaActual.getMonth();
+
+  titulo.innerText = fechaActual.toLocaleString("es-UY", {
+    month: "long",
+    year: "numeric"
+  });
+
+  calendar.innerHTML = "";
+
+  const primerDia = new Date(year, month, 1).getDay();
+  const diasMes = new Date(year, month + 1, 0).getDate();
+
+  for (let i = 0; i < primerDia; i++) {
+    calendar.innerHTML += "<div></div>";
+  }
+
+  for (let d = 1; d <= diasMes; d++) {
+    const fechaStr = `${year}-${String(month + 1).padStart(2,"0")}-${String(d).padStart(2,"0")}`;
+
+    const eventos = escuelas.filter(e =>
+      (e.fechaCoordinada && e.fechaCoordinada.startsWith(fechaStr)) ||
+      (e.fechaRealizada && e.fechaRealizada.startsWith(fechaStr))
+    );
+
+    let htmlEventos = "";
+
+    eventos.forEach(e => {
+      htmlEventos += `
+        <div class="event ${e.estado}" onclick="abrirDesdeCalendario(${e.id})">
+          Esc ${e.escuela}
+        </div>
+      `;
+    });
+
+    calendar.innerHTML += `
+      <div class="day">
+        <div class="day-number">${d}</div>
+        ${htmlEventos}
+      </div>
+    `;
+  }
+}
+
+function cambiarMes(delta) {
+  fechaActual.setMonth(fechaActual.getMonth() + delta);
+  renderCalendario();
+}
+
+function abrirDesdeCalendario(id) {
+  document.querySelector('[data-section="mapa"]').click();
+  mostrarDetalle(id);
+}
+
+const originalActualizarTodo = actualizarTodo;
+actualizarTodo = function() {
+  originalActualizarTodo();
+  renderCalendario();
+};
